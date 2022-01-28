@@ -86,14 +86,14 @@
             // openPuzzeToolStripMenuItem
             // 
             this.openPuzzeToolStripMenuItem.Name = "openPuzzeToolStripMenuItem";
-            this.openPuzzeToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.openPuzzeToolStripMenuItem.Size = new System.Drawing.Size(139, 22);
             this.openPuzzeToolStripMenuItem.Text = "Open Puzzle";
             this.openPuzzeToolStripMenuItem.Click += new System.EventHandler(this.openPuzzeToolStripMenuItem_Click);
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(139, 22);
             this.exitToolStripMenuItem.Text = "Exit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
@@ -109,7 +109,7 @@
             // aboudToolStripMenuItem
             // 
             this.aboudToolStripMenuItem.Name = "aboudToolStripMenuItem";
-            this.aboudToolStripMenuItem.Size = new System.Drawing.Size(107, 22);
+            this.aboudToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.aboudToolStripMenuItem.Text = "About";
             this.aboudToolStripMenuItem.Click += new System.EventHandler(this.aboudToolStripMenuItem_Click);
             // 
@@ -308,8 +308,10 @@
             this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Rebus Ion";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Main_FormClosed);
             this.Load += new System.EventHandler(this.Form1_Load);
             this.LocationChanged += new System.EventHandler(this.Form1_LocationChanged);
+            this.Resize += new System.EventHandler(this.Main_Resize);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.board)).EndInit();

@@ -27,5 +27,25 @@ namespace crossword
         {
            
         }
+
+        private void Clues_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            this.Hide();
+        }
+
+        private void Clues_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Clues_Resize(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void Clues_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            e.Cancel = true;
+        }
     }
 }

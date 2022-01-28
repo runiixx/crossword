@@ -16,9 +16,11 @@ namespace crossword
         Clues clue_window = new Clues();
         List<id_cells> idc = new List<id_cells>();
         public String puzzle_file = Application.StartupPath + "\\puzzles\\puzzle_1.pzl";
+        bool afisareClues = false;
+        int clue_x, clue_y;
         public Main()
         {
-            buildWordList();
+            buildWordList(clue_window);
             InitializeComponent();
         }
 
@@ -30,10 +32,13 @@ namespace crossword
             clue_window.StartPosition = FormStartPosition.Manual;
             clue_window.Show();
             clue_window.clue_board.AutoResizeColumn(0); 
+            afisareClues=true;
+            //this.WindowState = FormWindowState.Minimized;
+            
         }
-        private void InitBoard()
+        private void InitBoard() //initialize the game board
         {
-            board.BackgroundColor = Color.Black;
+            board.BackgroundColor = Color.Black; //every cells becomes black 
             board.DefaultCellStyle.BackColor = Color.Black;
             for(int i =0;i < 21; i++)
             {
@@ -42,9 +47,9 @@ namespace crossword
             }
             foreach(DataGridViewColumn c in board.Columns)
             {
-                c.Width = board.Width / board.Columns.Count;
+                c.Width = board.Width / board.Columns.Count; //divides colums width to screen resolution
             }
-            foreach (DataGridViewRow r in board.Rows)
+            foreach (DataGridViewRow r in board.Rows) //divides rows height to screen resolution
             {
                 r.Height = board.Width / board.Rows.Count;
             }
@@ -52,60 +57,60 @@ namespace crossword
             {
                 for (int col=0; col < board.Columns.Count; col++)
                 {
-                    board[col, row].ReadOnly = true;
+                    board[col, row].ReadOnly = true;  // makes every cell non editable
                 }
             }
-            foreach(id_cells i in idc) {
+            foreach(id_cells i in idc) { 
                 int start_col = i.x;
                 int start_row = i.y;
-                char[] word =i.word.ToCharArray();
+                char[] word =i.word.ToCharArray(); //converts strings to char array
                 
                 for(int j = 0; j < word.Length; j++)
                 {
-                    if (i.direction.ToUpper() == "ACROSS")
+                    if (i.direction.ToUpper() == "ACROSS") //verify if the word should be displayed horizontally
                     {
-                        formatCell(start_row, start_col + j, word[j].ToString());
+                        formatCell(start_row, start_col + j, word[j].ToString()); //verify if the word should be displayed vertically
                     }
-                    if (i.direction.ToUpper() == "DOWN")
+                    if (i.direction.ToUpper() == "DOWN") //verify if the word should be displayed vertically
                     {
                         formatCell(start_row+j, start_col , word[j].ToString());
                     }
                 }
             }
         }
-        private void formatCell(int row, int col, String letter)
+        private void formatCell(int row, int col, String letter) //formats any playable cell 
         {
-            DataGridViewCell c = board[col, row];
-            c.Style.BackColor = Color.White;
+            DataGridViewCell c = board[col, row]; //cell object
+            c.Style.BackColor = Color.White; //applies the style of the playable cell 
             c.ReadOnly = false;
             c.Style.SelectionBackColor = Color.Cyan;
-            c.Tag = letter.ToUpper();
+            c.Tag = letter.ToUpper();  // tag is used to verify if the leter the user enters the correct letter 
         }
-        private void buildWordList()
+        private void buildWordList(Clues clue) // parses the information from the file to a list
         {
             String line = "";
-            using (StreamReader s = new StreamReader(puzzle_file))
+            using (StreamReader s = new StreamReader(puzzle_file)) //reads the file
             {
                 line = s.ReadLine();//ignore
-                while((line= s.ReadLine()) != null)
+                while((line= s.ReadLine()) != null) //if there are lines of data
                 {
-                    String[] l = line.Split('|');
-                    idc.Add(new id_cells(Int32.Parse(l[0]), Int32.Parse(l[1]), l[2], l[3], l[4], l[5]));
-                    clue_window.clue_board.Rows.Add(new String[] { l[3], l[2], l[5] });
+                    String[] l = line.Split('|'); //splits the data 
+                    idc.Add(new id_cells(Int32.Parse(l[0]), Int32.Parse(l[1]), l[2], l[3], l[4], l[5])); // adds data to a list of objects 
+                    clue.clue_board.Rows.Add(new String[] { l[3], l[2], l[5] }); // adds the number clue and direction to the clue window
                 }
             }
         }
-        private void openPuzzeToolStripMenuItem_Click(object sender, EventArgs e)
+        private void openPuzzeToolStripMenuItem_Click(object sender, EventArgs e) // function to open custom pzl file
         {
-            OpenFileDialog OFD = new OpenFileDialog();
-            OFD.Filter = "Puzzle Files|*.pzl";
-            if (OFD.ShowDialog().Equals(DialogResult.OK))
+            OpenFileDialog OFD = new OpenFileDialog(); // creates a file dialog object 
+            OFD.Filter = "Puzzle Files|*.pzl"; // filters files so the user can only open pzl files 
+            if (OFD.ShowDialog().Equals(DialogResult.OK)) //checks if the user has selected a file 
             {
-                puzzle_file = OFD.FileName;
-                board.Rows.Clear();
-                clue_window.clue_board.Rows.Clear();
-                idc.Clear();
-                buildWordList();
+                puzzle_file = OFD.FileName; //changes the file location of the example to the custom file
+                board.Rows.Clear(); //clears the board 
+                clue_window.clue_board.Rows.Clear(); //clears the clue board 
+                idc.Clear(); // clears the list of objects
+                buildWordList(clue_window); 
                 InitBoard();
             }
         }
@@ -134,25 +139,40 @@ namespace crossword
 
         private void Form1_LocationChanged(object sender, EventArgs e)
         {
+
+            clue_x = this.Location.X + this.Width + 1;
+            clue_y = this.Location.Y;
+            clue_window.SetDesktopLocation(clue_x,clue_y);
+            if (this.WindowState != FormWindowState.Minimized)
+            {
+                return;
+            }
+            clue_window.SetDesktopLocation(clue_x,clue_y);
+
+
+        }
+
+        private void locationChanged(object sender, EventArgs e, Clues clue)
+        {
             clue_window.SetDesktopLocation(this.Location.X + this.Width + 1, this.Location.Y);
         }
 
-        private void board_CellValueChanged(object sender, DataGridViewCellEventArgs e)
+        private void board_CellValueChanged(object sender, DataGridViewCellEventArgs e) //function that fires if the player enters a value to the boars
         {
             try
             {
-                board[e.ColumnIndex, e.RowIndex].Value = board[e.ColumnIndex, e.RowIndex].Value.ToString().ToUpper();
+                board[e.ColumnIndex, e.RowIndex].Value = board[e.ColumnIndex, e.RowIndex].Value.ToString().ToUpper(); // makes every letter to uppercase
             }
             catch { }
             try
             {
-                if(board[e.ColumnIndex, e.RowIndex].Value.ToString().Length >1)
+                if(board[e.ColumnIndex, e.RowIndex].Value.ToString().Length >1) //if the player enters too many chars to  a single cells the cell will take the first leter
                     board[e.ColumnIndex, e.RowIndex].Value=board[e.ColumnIndex, e.RowIndex].Value.ToString().Substring(0,1);
             }
             catch { }
             try
             {
-                if (board[e.ColumnIndex, e.RowIndex].Value.ToString().Equals(board[e.ColumnIndex, e.RowIndex].Tag.ToString().ToUpper()))
+                if (board[e.ColumnIndex, e.RowIndex].Value.ToString().Equals(board[e.ColumnIndex, e.RowIndex].Tag.ToString().ToUpper())) // if the letter matches the tag
                     board[e.ColumnIndex, e.RowIndex].Style.ForeColor = Color.DarkGreen;
                 else
                     board[e.ColumnIndex, e.RowIndex].Style.ForeColor = Color.DarkRed;
@@ -160,7 +180,7 @@ namespace crossword
             catch { }
         }
 
-        private void board_CellPainting(object sender, DataGridViewCellPaintingEventArgs e)
+        private void board_CellPainting(object sender, DataGridViewCellPaintingEventArgs e) //function to draw the numbers on top of cells
         {
             String number = "";
             if(idc.Any(c => (number = c.number) != ""&& c.x == e.ColumnIndex && c.y == e.RowIndex)){
@@ -172,16 +192,40 @@ namespace crossword
                 e.Handled = true;
             }
         }
+
+        private void cluesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+            clue_window.Show();
+            
+        }
+        
+        private void Clue_window_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            throw new NotImplementedException();
+            clue_window.Hide();
+        }
+
+        private void Main_FormClosed(object sender, FormClosedEventArgs e)
+        {
+
+        }
+
+        private void Main_Resize(object sender, EventArgs e)
+        {
+            
+
+        }
     }
-    public class id_cells
+    public class id_cells //piece data from pzl file
     {
-        public int x;
-        public int y;
-        public String direction;
-        public String number;
-        public String word;
-        public String clue;
-        public id_cells(int x, int y, String d, String n, String w, String c)
+        public int x; //the start x of the word
+        public int y; //the start y of the word
+        public String direction; //direction of the word arrat
+        public String number; //number of item
+        public String word; //the word to guess
+        public String clue; // the question/clue to find out 
+        public id_cells(int x, int y, String d, String n, String w, String c) //initialize the objects with these attributes
         {
             this.x = x;
             this.y = y;
@@ -189,7 +233,7 @@ namespace crossword
             this.number = n;
             this.word = w;
             this.clue = c;
-
+            
         }
     }
 }

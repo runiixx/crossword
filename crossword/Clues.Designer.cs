@@ -86,7 +86,11 @@
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "Clues";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Clues_FormClosing);
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Clues_FormClosed);
+            this.Load += new System.EventHandler(this.Clues_Load);
             this.LocationChanged += new System.EventHandler(this.Clues_LocationChanged);
+            this.Resize += new System.EventHandler(this.Clues_Resize);
             ((System.ComponentModel.ISupportInitialize)(this.clue_board)).EndInit();
             this.ResumeLayout(false);
 
