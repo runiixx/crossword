@@ -30,7 +30,6 @@
         {
             this.clue_board = new System.Windows.Forms.DataGridView();
             this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.clue_board)).BeginInit();
             this.SuspendLayout();
@@ -44,7 +43,6 @@
             this.clue_board.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.clue_board.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Column1,
-            this.Column2,
             this.Column3});
             this.clue_board.Dock = System.Windows.Forms.DockStyle.Fill;
             this.clue_board.Location = new System.Drawing.Point(0, 0);
@@ -56,20 +54,15 @@
             // 
             // Column1
             // 
-            this.Column1.HeaderText = "#";
+            this.Column1.HeaderText = "Nr.";
             this.Column1.Name = "Column1";
             this.Column1.ReadOnly = true;
-            // 
-            // Column2
-            // 
-            this.Column2.HeaderText = "Direction";
-            this.Column2.Name = "Column2";
-            this.Column2.ReadOnly = true;
+            this.Column1.Width = 50;
             // 
             // Column3
             // 
             this.Column3.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.Column3.HeaderText = "Clue";
+            this.Column3.HeaderText = "Intrebari";
             this.Column3.Name = "Column3";
             this.Column3.ReadOnly = true;
             // 
@@ -97,9 +90,8 @@
         }
 
         #endregion
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column3;
         public System.Windows.Forms.DataGridView clue_board;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column3;
     }
 }

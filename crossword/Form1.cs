@@ -96,7 +96,7 @@ namespace crossword
                 {
                     String[] l = line.Split('|'); //splits the data 
                     idc.Add(new id_cells(Int32.Parse(l[0]), Int32.Parse(l[1]), l[2], l[3], l[4], l[5])); // adds data to a list of objects 
-                    clue.clue_board.Rows.Add(new String[] { l[3], l[2], l[5] }); // adds the number clue and direction to the clue window
+                    clue.clue_board.Rows.Add(new String[] { l[3], l[5] }); // adds the number clue and direction to the clue window
                 }
             }
         }

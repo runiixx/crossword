@@ -58,6 +58,7 @@
             this.Column20 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column21 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column22 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.board)).BeginInit();
             this.SuspendLayout();
@@ -86,21 +87,22 @@
             // openPuzzeToolStripMenuItem
             // 
             this.openPuzzeToolStripMenuItem.Name = "openPuzzeToolStripMenuItem";
-            this.openPuzzeToolStripMenuItem.Size = new System.Drawing.Size(139, 22);
+            this.openPuzzeToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.openPuzzeToolStripMenuItem.Text = "Open Puzzle";
             this.openPuzzeToolStripMenuItem.Click += new System.EventHandler(this.openPuzzeToolStripMenuItem_Click);
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(139, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.exitToolStripMenuItem.Text = "Exit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
             // helpToolStripMenuItem
             // 
             this.helpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.aboudToolStripMenuItem});
+            this.aboudToolStripMenuItem,
+            this.aboutToolStripMenuItem});
             this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
             this.helpToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
             this.helpToolStripMenuItem.Text = "Help";
@@ -110,7 +112,7 @@
             // 
             this.aboudToolStripMenuItem.Name = "aboudToolStripMenuItem";
             this.aboudToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.aboudToolStripMenuItem.Text = "About";
+            this.aboudToolStripMenuItem.Text = "Credits";
             this.aboudToolStripMenuItem.Click += new System.EventHandler(this.aboudToolStripMenuItem_Click);
             // 
             // board
@@ -295,6 +297,12 @@
             this.Column22.Name = "Column22";
             this.Column22.ReadOnly = true;
             // 
+            // aboutToolStripMenuItem
+            // 
+            this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.aboutToolStripMenuItem.Text = "About";
+            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -351,6 +359,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Column21;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column22;
         public System.Windows.Forms.DataGridView board;
+        private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
     }
 }
 
