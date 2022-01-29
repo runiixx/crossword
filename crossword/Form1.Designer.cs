@@ -86,7 +86,7 @@
             // openPuzzeToolStripMenuItem
             // 
             this.openPuzzeToolStripMenuItem.Name = "openPuzzeToolStripMenuItem";
-            this.openPuzzeToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.openPuzzeToolStripMenuItem.Size = new System.Drawing.Size(139, 22);
             this.openPuzzeToolStripMenuItem.Text = "Open Puzzle";
             this.openPuzzeToolStripMenuItem.Click += new System.EventHandler(this.openPuzzeToolStripMenuItem_Click);
             // 
@@ -103,14 +103,14 @@
             // aboudToolStripMenuItem
             // 
             this.aboudToolStripMenuItem.Name = "aboudToolStripMenuItem";
-            this.aboudToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.aboudToolStripMenuItem.Size = new System.Drawing.Size(111, 22);
             this.aboudToolStripMenuItem.Text = "Credits";
             this.aboudToolStripMenuItem.Click += new System.EventHandler(this.aboudToolStripMenuItem_Click);
             // 
             // aboutToolStripMenuItem
             // 
             this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(111, 22);
             this.aboutToolStripMenuItem.Text = "About";
             this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
             // 
@@ -154,10 +154,10 @@
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
             dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
             dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.PapayaWhip;
             dataGridViewCellStyle1.Padding = new System.Windows.Forms.Padding(1);
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.PapayaWhip;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.PapayaWhip;
             dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.board.DefaultCellStyle = dataGridViewCellStyle1;
             this.board.Dock = System.Windows.Forms.DockStyle.Fill;

@@ -39,8 +39,11 @@ namespace crossword
         }
         private void InitBoard() //initialize the game board
         {
-            board.BackgroundColor = Color.Black; //every cells becomes black 
-            board.DefaultCellStyle.BackColor = Color.Black;
+           
+            
+            
+            board.BackgroundColor = Color.PapayaWhip; //every cells becomes black 
+            board.DefaultCellStyle.BackColor = Color.PapayaWhip;
             for(int i =0;i < 24; i++)
             {
                 board.Rows.Add();
@@ -49,6 +52,7 @@ namespace crossword
             foreach(DataGridViewColumn c in board.Columns)
             {
                 c.Width = board.Width / board.Columns.Count; //divides colums width to screen resolution
+                
             }
             foreach (DataGridViewRow r in board.Rows) //divides rows height to screen resolution
             {
@@ -198,7 +202,7 @@ namespace crossword
         {
             String number = "";
             if(idc.Any(c => (number = c.number) != ""&& c.x == e.ColumnIndex && c.y == e.RowIndex)){
-                Rectangle r = new Rectangle(e.CellBounds.X, e.CellBounds.Y, e.CellBounds.Width, e.CellBounds.Height);
+                Rectangle r = new Rectangle(e.CellBounds.X, e.CellBounds.Y, e.CellBounds.Width-1, e.CellBounds.Height-1);
                 e.Graphics.FillRectangle(Brushes.White, r);
                 Font f = new Font(e.CellStyle.Font.FontFamily, 7);
                 e.Graphics.DrawString(number, f, Brushes.Black, r);
@@ -209,7 +213,7 @@ namespace crossword
 
         private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Proiect facut de Murgu Andrei, Udrea Rares, Carasel Andrei si Mihai", "Credits");
+            MessageBox.Show("Crossword program v0.3.0");
         }
 
     }
