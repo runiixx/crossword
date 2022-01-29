@@ -133,7 +133,7 @@ namespace crossword
 
         private void aboudToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Proiect facut de Murgu Andrei, Udrea Rares, Carasel Andrei si Mihai", "Credits");
+            MessageBox.Show("Proiect facut de Murgu Andrei, Udrea Rares, Carasel Andrei și Mihai Botezatu", "Credits");
         }
 
 
@@ -193,9 +193,9 @@ namespace crossword
 
             }
             catch { }
-            if ((puncte / 2) == contor_puncte && finish == true) // win check
+            if ((puncte / 2) >100  && finish == true) // win check
             {
-                MessageBox.Show("Ai câștigat!");
+                MessageBox.Show("Te descurci foarte bine");
             }
 
         }
@@ -214,7 +214,7 @@ namespace crossword
 
         private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Crossword program v0.3.0");
+            MessageBox.Show("Crossword program v1.0");
         }
 
     }
