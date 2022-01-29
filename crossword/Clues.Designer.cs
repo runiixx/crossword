@@ -40,6 +40,7 @@
             this.clue_board.AllowUserToDeleteRows = false;
             this.clue_board.AllowUserToResizeColumns = false;
             this.clue_board.AllowUserToResizeRows = false;
+            this.clue_board.BackgroundColor = System.Drawing.Color.PapayaWhip;
             this.clue_board.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.clue_board.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Column1,

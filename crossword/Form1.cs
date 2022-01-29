@@ -93,6 +93,7 @@ namespace crossword
             c.Style.BackColor = Color.White; //applies the style of the playable cell 
             c.ReadOnly = false;
             c.Style.SelectionBackColor = Color.Cyan;
+            c.Style.SelectionForeColor = Color.Black;
             c.Tag = letter.ToUpper();  // tag is used to verify if the leter the user enters the correct letter 
 
         }
@@ -171,7 +172,7 @@ namespace crossword
                 {  // if the letter matches the tag
                     board[e.ColumnIndex, e.RowIndex].Style.ForeColor = Color.DarkGreen;
                     puncte++;
-                    points0ToolStripMenuItem.Text = "Points: " + (puncte / 2).ToString() + "/" + contor_puncte.ToString();
+                    points0ToolStripMenuItem.Text = "Points: " + (puncte / 2).ToString();
                 }
                 else
                     board[e.ColumnIndex, e.RowIndex].Style.ForeColor = Color.DarkRed;

@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openPuzzeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -163,9 +164,17 @@
             this.board.Dock = System.Windows.Forms.DockStyle.Fill;
             this.board.Location = new System.Drawing.Point(0, 24);
             this.board.Name = "board";
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.Desktop;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.board.RowHeadersDefaultCellStyle = dataGridViewCellStyle2;
             this.board.RowHeadersVisible = false;
             this.board.ScrollBars = System.Windows.Forms.ScrollBars.None;
-            this.board.Size = new System.Drawing.Size(619, 602);
+            this.board.Size = new System.Drawing.Size(619, 623);
             this.board.TabIndex = 1;
             this.board.CellPainting += new System.Windows.Forms.DataGridViewCellPaintingEventHandler(this.board_CellPainting);
             this.board.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.board_CellValueChanged);
@@ -306,7 +315,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(619, 626);
+            this.ClientSize = new System.Drawing.Size(619, 647);
             this.Controls.Add(this.board);
             this.Controls.Add(this.menuStrip1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;

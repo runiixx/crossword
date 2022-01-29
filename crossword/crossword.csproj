@@ -101,7 +101,6 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
     <None Include="puzzles\puzzle_1.pzl">
-      <SubType>Form</SubType>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>
