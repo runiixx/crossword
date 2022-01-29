@@ -13,14 +13,14 @@ namespace crossword
 {
     public partial class Main : Form
     {
+        public static int puncte = 0;
         Clues clue_window = new Clues();
         List<id_cells> idc = new List<id_cells>();
         public String puzzle_file = Application.StartupPath + "\\puzzles\\puzzle_1.pzl";
-        bool afisareClues = false;
-        int clue_x, clue_y;
-        int points = 0;
-        int count = 0;
-        int ceva = 1234567890;
+        int clue_x, clue_y; //clue window coordonates
+        int contor_puncte = 0; // cell count for points
+        int cifre = 1234567890; // unwanted characters
+        bool finish = false; //finished loading 
         public Main()
         {
             buildWordList();
@@ -34,7 +34,6 @@ namespace crossword
             clue_window.StartPosition = FormStartPosition.Manual;
             clue_window.Show();
             clue_window.clue_board.AutoResizeColumn(0); 
-            afisareClues=true;
             //this.WindowState = FormWindowState.Minimized;
             
         }
@@ -42,7 +41,7 @@ namespace crossword
         {
             board.BackgroundColor = Color.Black; //every cells becomes black 
             board.DefaultCellStyle.BackColor = Color.Black;
-            for(int i =0;i < 21; i++)
+            for(int i =0;i < 24; i++)
             {
                 board.Rows.Add();
 
@@ -62,7 +61,8 @@ namespace crossword
                     board[col, row].ReadOnly = true;  // makes every cell non editable
                 }
             }
-            foreach(id_cells i in idc) { 
+            foreach(id_cells i in idc) {
+                finish = false;
                 int start_col = i.x;
                 int start_row = i.y;
                 char[] word =i.word.ToCharArray(); //converts strings to char array
@@ -72,15 +72,16 @@ namespace crossword
                     if (i.direction.ToUpper() == "ACROSS") //verify if the word should be displayed horizontally
                     {
                         formatCell(start_row, start_col + j, word[j].ToString()); //verify if the word should be displayed vertically
-                        count++;
+                        contor_puncte++;
                     }
                     if (i.direction.ToUpper() == "DOWN") //verify if the word should be displayed vertically
                     {
                         formatCell(start_row+j, start_col , word[j].ToString());
-                        count++;
+                        contor_puncte++;
                     }
                 }
             }
+            finish = true;
         }
         private void formatCell(int row, int col, String letter) //formats any playable cell 
         {
@@ -118,12 +119,6 @@ namespace crossword
                 buildWordList(); 
                 InitBoard();
             }
-        }
-
-
-        private void exitToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            Application.Exit();
         }
 
         private void helpToolStripMenuItem_Click(object sender, EventArgs e)
@@ -171,7 +166,8 @@ namespace crossword
                 if (board[e.ColumnIndex, e.RowIndex].Value.ToString().Equals(board[e.ColumnIndex, e.RowIndex].Tag.ToString().ToUpper()))
                 {  // if the letter matches the tag
                     board[e.ColumnIndex, e.RowIndex].Style.ForeColor = Color.DarkGreen;
-                    points++;
+                    puncte++;
+                    points0ToolStripMenuItem.Text = "Points: " + (puncte / 2).ToString() + "/" + contor_puncte.ToString();
                 }
                 else
                     board[e.ColumnIndex, e.RowIndex].Style.ForeColor = Color.DarkRed;
@@ -179,19 +175,24 @@ namespace crossword
             catch { }
             try
             {
-                while (ceva != 0)
+                while (cifre != 0) // verifies if the char is a number
                 {
-                    if (board[e.ColumnIndex, e.RowIndex].Value.ToString().Equals((ceva % 10).ToString()))
+                    if (board[e.ColumnIndex, e.RowIndex].Value.ToString().Equals((cifre % 10).ToString()))
                     {
                         MessageBox.Show("Cifrele nu se admit");
                         board[e.ColumnIndex, e.RowIndex].Value = "";
                     }
-                    ceva /= 10;
+                    cifre /= 10;
                 }
-                ceva = 1234567890;
+                cifre = 1234567890;
 
             }
             catch { }
+            if ((puncte / 2) == contor_puncte && finish == true) // win check
+            {
+                MessageBox.Show("Ai câștigat!");
+            }
+
         }
         private void board_CellPainting(object sender, DataGridViewCellPaintingEventArgs e) //function to draw the numbers on top of cells
         {
@@ -208,7 +209,7 @@ namespace crossword
 
         private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            MessageBox.Show(points.ToString()+ "/" + count.ToString());
+            MessageBox.Show("Proiect facut de Murgu Andrei, Udrea Rares, Carasel Andrei si Mihai", "Credits");
         }
 
     }
@@ -220,6 +221,7 @@ namespace crossword
         public String number; //number of item
         public String word; //the word to guess
         public String clue; // the question/clue to find out 
+
         public id_cells(int x, int y, String d, String n, String w, String c) //initialize the objects with these attributes
         {
             this.x = x;

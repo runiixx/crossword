@@ -32,10 +32,10 @@
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openPuzzeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboudToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.points0ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.board = new System.Windows.Forms.DataGridView();
             this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -67,7 +67,8 @@
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.fileToolStripMenuItem,
-            this.helpToolStripMenuItem});
+            this.helpToolStripMenuItem,
+            this.points0ToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(619, 24);
@@ -77,8 +78,7 @@
             // fileToolStripMenuItem
             // 
             this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.openPuzzeToolStripMenuItem,
-            this.exitToolStripMenuItem});
+            this.openPuzzeToolStripMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
             this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
             this.fileToolStripMenuItem.Text = "File";
@@ -86,16 +86,9 @@
             // openPuzzeToolStripMenuItem
             // 
             this.openPuzzeToolStripMenuItem.Name = "openPuzzeToolStripMenuItem";
-            this.openPuzzeToolStripMenuItem.Size = new System.Drawing.Size(139, 22);
+            this.openPuzzeToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.openPuzzeToolStripMenuItem.Text = "Open Puzzle";
             this.openPuzzeToolStripMenuItem.Click += new System.EventHandler(this.openPuzzeToolStripMenuItem_Click);
-            // 
-            // exitToolStripMenuItem
-            // 
-            this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(139, 22);
-            this.exitToolStripMenuItem.Text = "Exit";
-            this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
             // helpToolStripMenuItem
             // 
@@ -120,6 +113,12 @@
             this.aboutToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.aboutToolStripMenuItem.Text = "About";
             this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
+            // 
+            // points0ToolStripMenuItem
+            // 
+            this.points0ToolStripMenuItem.Name = "points0ToolStripMenuItem";
+            this.points0ToolStripMenuItem.Size = new System.Drawing.Size(61, 20);
+            this.points0ToolStripMenuItem.Text = "Points:0";
             // 
             // board
             // 
@@ -166,7 +165,7 @@
             this.board.Name = "board";
             this.board.RowHeadersVisible = false;
             this.board.ScrollBars = System.Windows.Forms.ScrollBars.None;
-            this.board.Size = new System.Drawing.Size(619, 612);
+            this.board.Size = new System.Drawing.Size(619, 602);
             this.board.TabIndex = 1;
             this.board.CellPainting += new System.Windows.Forms.DataGridViewCellPaintingEventHandler(this.board_CellPainting);
             this.board.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.board_CellValueChanged);
@@ -307,9 +306,10 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(619, 636);
+            this.ClientSize = new System.Drawing.Size(619, 626);
             this.Controls.Add(this.board);
             this.Controls.Add(this.menuStrip1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MainMenuStrip = this.menuStrip1;
             this.MaximizeBox = false;
             this.Name = "Main";
@@ -332,7 +332,6 @@
         private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem openPuzzeToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem helpToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem aboudToolStripMenuItem;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
@@ -358,6 +357,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Column22;
         public System.Windows.Forms.DataGridView board;
         private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem points0ToolStripMenuItem;
     }
 }
 

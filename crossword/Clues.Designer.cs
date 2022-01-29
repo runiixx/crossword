@@ -50,7 +50,6 @@
             this.clue_board.RowHeadersVisible = false;
             this.clue_board.Size = new System.Drawing.Size(384, 530);
             this.clue_board.TabIndex = 0;
-          
             // 
             // Column1
             // 
@@ -72,6 +71,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(384, 530);
             this.Controls.Add(this.clue_board);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "Clues";
@@ -81,6 +81,7 @@
             this.Text = "Clues";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Clues_FormClosing);
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Clues_FormClosed);
+            this.Load += new System.EventHandler(this.Clues_Load);
             ((System.ComponentModel.ISupportInitialize)(this.clue_board)).EndInit();
             this.ResumeLayout(false);
 
