@@ -18,16 +18,18 @@ namespace crossword
         public String puzzle_file = Application.StartupPath + "\\puzzles\\puzzle_1.pzl";
         bool afisareClues = false;
         int clue_x, clue_y;
+        int points = 0;
+        int count = 0;
+        int ceva = 1234567890;
         public Main()
         {
-            buildWordList(clue_window);
+            buildWordList();
             InitializeComponent();
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
             InitBoard();
-            formatCell(5, 5, "B");
             clue_window.SetDesktopLocation(this.Location.X + this.Width + 1, this.Location.Y);
             clue_window.StartPosition = FormStartPosition.Manual;
             clue_window.Show();
@@ -70,10 +72,12 @@ namespace crossword
                     if (i.direction.ToUpper() == "ACROSS") //verify if the word should be displayed horizontally
                     {
                         formatCell(start_row, start_col + j, word[j].ToString()); //verify if the word should be displayed vertically
+                        count++;
                     }
                     if (i.direction.ToUpper() == "DOWN") //verify if the word should be displayed vertically
                     {
                         formatCell(start_row+j, start_col , word[j].ToString());
+                        count++;
                     }
                 }
             }
@@ -85,8 +89,9 @@ namespace crossword
             c.ReadOnly = false;
             c.Style.SelectionBackColor = Color.Cyan;
             c.Tag = letter.ToUpper();  // tag is used to verify if the leter the user enters the correct letter 
+
         }
-        private void buildWordList(Clues clue) // parses the information from the file to a list
+        private void buildWordList() // parses the information from the file to a list
         {
             String line = "";
             using (StreamReader s = new StreamReader(puzzle_file)) //reads the file
@@ -96,7 +101,7 @@ namespace crossword
                 {
                     String[] l = line.Split('|'); //splits the data 
                     idc.Add(new id_cells(Int32.Parse(l[0]), Int32.Parse(l[1]), l[2], l[3], l[4], l[5])); // adds data to a list of objects 
-                    clue.clue_board.Rows.Add(new String[] { l[3], l[5] }); // adds the number clue and direction to the clue window
+                    clue_window.clue_board.Rows.Add(new String[] { l[3], l[5] }); // adds the number clue and direction to the clue window
                 }
             }
         }
@@ -110,15 +115,11 @@ namespace crossword
                 board.Rows.Clear(); //clears the board 
                 clue_window.clue_board.Rows.Clear(); //clears the clue board 
                 idc.Clear(); // clears the list of objects
-                buildWordList(clue_window); 
+                buildWordList(); 
                 InitBoard();
             }
         }
 
-        private void fileToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-
-        }
 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -152,11 +153,6 @@ namespace crossword
 
         }
 
-        private void locationChanged(object sender, EventArgs e, Clues clue)
-        {
-            clue_window.SetDesktopLocation(this.Location.X + this.Width + 1, this.Location.Y);
-        }
-
         private void board_CellValueChanged(object sender, DataGridViewCellEventArgs e) //function that fires if the player enters a value to the boars
         {
             try
@@ -166,20 +162,37 @@ namespace crossword
             catch { }
             try
             {
-                if(board[e.ColumnIndex, e.RowIndex].Value.ToString().Length >1) //if the player enters too many chars to  a single cells the cell will take the first leter
-                    board[e.ColumnIndex, e.RowIndex].Value=board[e.ColumnIndex, e.RowIndex].Value.ToString().Substring(0,1);
+                if (board[e.ColumnIndex, e.RowIndex].Value.ToString().Length > 1) //if the player enters too many chars to  a single cells the cell will take the first leter
+                    board[e.ColumnIndex, e.RowIndex].Value = board[e.ColumnIndex, e.RowIndex].Value.ToString().Substring(0, 1);
             }
             catch { }
             try
             {
-                if (board[e.ColumnIndex, e.RowIndex].Value.ToString().Equals(board[e.ColumnIndex, e.RowIndex].Tag.ToString().ToUpper())) // if the letter matches the tag
+                if (board[e.ColumnIndex, e.RowIndex].Value.ToString().Equals(board[e.ColumnIndex, e.RowIndex].Tag.ToString().ToUpper()))
+                {  // if the letter matches the tag
                     board[e.ColumnIndex, e.RowIndex].Style.ForeColor = Color.DarkGreen;
+                    points++;
+                }
                 else
                     board[e.ColumnIndex, e.RowIndex].Style.ForeColor = Color.DarkRed;
             }
             catch { }
-        }
+            try
+            {
+                while (ceva != 0)
+                {
+                    if (board[e.ColumnIndex, e.RowIndex].Value.ToString().Equals((ceva % 10).ToString()))
+                    {
+                        MessageBox.Show("Cifrele nu se admit");
+                        board[e.ColumnIndex, e.RowIndex].Value = "";
+                    }
+                    ceva /= 10;
+                }
+                ceva = 1234567890;
 
+            }
+            catch { }
+        }
         private void board_CellPainting(object sender, DataGridViewCellPaintingEventArgs e) //function to draw the numbers on top of cells
         {
             String number = "";
@@ -193,29 +206,11 @@ namespace crossword
             }
         }
 
-        private void cluesToolStripMenuItem_Click(object sender, EventArgs e)
+        private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
-            clue_window.Show();
-            
-        }
-        
-        private void Clue_window_FormClosed(object sender, FormClosedEventArgs e)
-        {
-            throw new NotImplementedException();
-            clue_window.Hide();
+            MessageBox.Show(points.ToString()+ "/" + count.ToString());
         }
 
-        private void Main_FormClosed(object sender, FormClosedEventArgs e)
-        {
-
-        }
-
-        private void Main_Resize(object sender, EventArgs e)
-        {
-            
-
-        }
     }
     public class id_cells //piece data from pzl file
     {
