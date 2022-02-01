@@ -15,6 +15,7 @@ namespace crossword
     {
         public static int puncte = 0;
         Clues clue_window = new Clues();
+        
         List<id_cells> idc = new List<id_cells>();
         public String puzzle_file = Application.StartupPath + "\\puzzles\\puzzle_1.pzl";
         int clue_x, clue_y; //clue window coordonates
@@ -25,6 +26,7 @@ namespace crossword
         {
             buildWordList();
             InitializeComponent();
+            
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -33,69 +35,76 @@ namespace crossword
             clue_window.SetDesktopLocation(this.Location.X + this.Width + 1, this.Location.Y);
             clue_window.StartPosition = FormStartPosition.Manual;
             clue_window.Show();
-            clue_window.clue_board.AutoResizeColumn(0); 
+            clue_window.clue_board.AutoResizeColumn(0);
             //this.WindowState = FormWindowState.Minimized;
-            
+
         }
         private void InitBoard() //initialize the game board
         {
-           
-            
-            
+
+
+            contor_puncte = 0;
             board.BackgroundColor = Color.PapayaWhip; //every cells becomes black 
             board.DefaultCellStyle.BackColor = Color.PapayaWhip;
-            for(int i =0;i < 24; i++)
+            for (int i = 0; i < 24; i++)
             {
                 board.Rows.Add();
 
             }
-            foreach(DataGridViewColumn c in board.Columns)
+            foreach (DataGridViewColumn c in board.Columns)
             {
                 c.Width = board.Width / board.Columns.Count; //divides colums width to screen resolution
-                
+
             }
             foreach (DataGridViewRow r in board.Rows) //divides rows height to screen resolution
             {
                 r.Height = board.Width / board.Rows.Count;
             }
-            for (int row= 0; row < board.Rows.Count; row++)
+            for (int row = 0; row < board.Rows.Count; row++)
             {
-                for (int col=0; col < board.Columns.Count; col++)
+                for (int col = 0; col < board.Columns.Count; col++)
                 {
                     board[col, row].ReadOnly = true;  // makes every cell non editable
                 }
             }
-            foreach(id_cells i in idc) {
+            foreach (id_cells i in idc) {
                 finish = false;
                 int start_col = i.x;
                 int start_row = i.y;
-                char[] word =i.word.ToCharArray(); //converts strings to char array
-                
-                for(int j = 0; j < word.Length; j++)
+                char[] word = i.word.ToCharArray(); //converts strings to char array
+
+                for (int j = 0; j < word.Length; j++)
                 {
                     if (i.direction.ToUpper() == "ACROSS") //verify if the word should be displayed horizontally
                     {
                         formatCell(start_row, start_col + j, word[j].ToString()); //verify if the word should be displayed vertically
-                        contor_puncte++;
+
                     }
                     if (i.direction.ToUpper() == "DOWN") //verify if the word should be displayed vertically
                     {
-                        formatCell(start_row+j, start_col , word[j].ToString());
-                        contor_puncte++;
+                        formatCell(start_row + j, start_col, word[j].ToString());
                     }
                 }
             }
             finish = true;
         }
+        
+    
+
         private void formatCell(int row, int col, String letter) //formats any playable cell 
-        {
+        { 
             DataGridViewCell c = board[col, row]; //cell object
+            if (c.Tag == null && letter != " ") 
+            {
+                contor_puncte++;
+            }
             c.Style.BackColor = Color.White; //applies the style of the playable cell 
             c.ReadOnly = false;
             c.Style.SelectionBackColor = Color.Cyan;
             c.Style.SelectionForeColor = Color.Black;
-            c.Tag = letter.ToUpper();  // tag is used to verify if the leter the user enters the correct letter 
-
+            
+            c.Tag = (letter).ToUpper();  // tag is used to verify if the leter the user enters the correct letter 
+            
         }
         private void buildWordList() // parses the information from the file to a list
         {
@@ -128,12 +137,13 @@ namespace crossword
 
         private void helpToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            Form2 credits = new Form2();
+            credits.Show();
         }
 
         private void aboudToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Proiect facut de Murgu Andrei, Udrea Rares, Carasel Andrei și Mihai Botezatu", "Credits");
+            
         }
 
 
@@ -155,6 +165,7 @@ namespace crossword
 
         private void board_CellValueChanged(object sender, DataGridViewCellEventArgs e) //function that fires if the player enters a value to the boars
         {
+
             try
             {
                 board[e.ColumnIndex, e.RowIndex].Value = board[e.ColumnIndex, e.RowIndex].Value.ToString().ToUpper(); // makes every letter to uppercase
@@ -168,14 +179,19 @@ namespace crossword
             catch { }
             try
             {
-                if (board[e.ColumnIndex, e.RowIndex].Value.ToString().Equals(board[e.ColumnIndex, e.RowIndex].Tag.ToString().ToUpper()))
+                if (board[e.ColumnIndex, e.RowIndex].Value.ToString().Equals(board[e.ColumnIndex, e.RowIndex].Tag.ToString().ToUpper()) && board[e.ColumnIndex, e.RowIndex].ReadOnly == false)
                 {  // if the letter matches the tag
                     board[e.ColumnIndex, e.RowIndex].Style.ForeColor = Color.DarkGreen;
                     puncte++;
-                    points0ToolStripMenuItem.Text = "Points: " + (puncte / 2).ToString();
+                    points0ToolStripMenuItem.Text = "Points: " + (puncte / 2).ToString() + "/" + contor_puncte.ToString();
+
+
                 }
                 else
+                {
                     board[e.ColumnIndex, e.RowIndex].Style.ForeColor = Color.DarkRed;
+                   
+                }
             }
             catch { }
             try
@@ -193,10 +209,12 @@ namespace crossword
 
             }
             catch { }
-            if ((puncte / 2) >100  && finish == true) // win check
+            if ((puncte / 2) == contor_puncte  && finish == true) // win check
             {
-                MessageBox.Show("Te descurci foarte bine");
+                MessageBox.Show("Felicitari");
             }
+
+            
 
         }
         private void board_CellPainting(object sender, DataGridViewCellPaintingEventArgs e) //function to draw the numbers on top of cells
@@ -212,9 +230,14 @@ namespace crossword
             }
         }
 
+        private void points0ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
         private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Crossword program v1.0");
+            MessageBox.Show("Crossword program  v1.0");
         }
 
     }
