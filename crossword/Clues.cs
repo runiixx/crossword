@@ -15,8 +15,9 @@ namespace crossword
         public Clues()
         {
             InitializeComponent();
-            
-            
+            clue_board.BackColor= Color.FromArgb(31, 31, 31);
+
+
         }
         private void Clues_FormClosed(object sender, FormClosedEventArgs e)
         {
@@ -34,6 +35,16 @@ namespace crossword
 
         private void Clues_Load(object sender, EventArgs e)
         {
+        }
+
+        private void clue_board_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void clue_board_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+       
         }
     }
 }

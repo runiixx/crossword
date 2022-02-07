@@ -53,9 +53,9 @@
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.Location = new System.Drawing.Point(12, 58);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(245, 24);
+            this.label2.Size = new System.Drawing.Size(300, 24);
             this.label2.TabIndex = 1;
-            this.label2.Text = "Murgu Andrei: Programarea";
+            this.label2.Text = "Andrei Murgu: Dezvoltare program";
             this.label2.Click += new System.EventHandler(this.label2_Click);
             // 
             // label3
@@ -66,7 +66,7 @@
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(422, 24);
             this.label3.TabIndex = 2;
-            this.label3.Text = "Cărășel Andrei și Botezatu Mihai: Design rebusuri";
+            this.label3.Text = "Andrei Cărășel și Mihai Botezatu: Design rebusuri";
             // 
             // label4
             // 
@@ -74,9 +74,10 @@
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label4.Location = new System.Drawing.Point(12, 131);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(353, 24);
+            this.label4.Size = new System.Drawing.Size(283, 24);
             this.label4.TabIndex = 3;
-            this.label4.Text = "Udrea Rares Gabriel: Redactarea Discurs";
+            this.label4.Text = "Rareș Udrea Redactarea Discurs";
+            this.label4.Click += new System.EventHandler(this.label4_Click);
             // 
             // label5
             // 

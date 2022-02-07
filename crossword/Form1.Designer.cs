@@ -58,8 +58,12 @@
             this.Column20 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column21 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column22 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.button1 = new System.Windows.Forms.Button();
+            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
+            this.panel1 = new System.Windows.Forms.Panel();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.board)).BeginInit();
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -109,6 +113,7 @@
             this.board.AllowUserToDeleteRows = false;
             this.board.AllowUserToResizeColumns = false;
             this.board.AllowUserToResizeRows = false;
+            this.board.BackgroundColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.board.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.board.ColumnHeadersVisible = false;
             this.board.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -143,7 +148,7 @@
             dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.PapayaWhip;
             dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.board.DefaultCellStyle = dataGridViewCellStyle1;
-            this.board.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.board.GridColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.board.Location = new System.Drawing.Point(0, 24);
             this.board.Name = "board";
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
@@ -156,7 +161,7 @@
             this.board.RowHeadersDefaultCellStyle = dataGridViewCellStyle2;
             this.board.RowHeadersVisible = false;
             this.board.ScrollBars = System.Windows.Forms.ScrollBars.None;
-            this.board.Size = new System.Drawing.Size(619, 623);
+            this.board.Size = new System.Drawing.Size(619, 603);
             this.board.TabIndex = 1;
             this.board.CellPainting += new System.Windows.Forms.DataGridViewCellPaintingEventHandler(this.board_CellPainting);
             this.board.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.board_CellValueChanged);
@@ -293,11 +298,46 @@
             this.Column22.Name = "Column22";
             this.Column22.ReadOnly = true;
             // 
+            // button1
+            // 
+            this.button1.ForeColor = System.Drawing.SystemColors.ButtonShadow;
+            this.button1.Location = new System.Drawing.Point(486, 7);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(106, 59);
+            this.button1.TabIndex = 3;
+            this.button1.Text = "Insereaza";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // richTextBox1
+            // 
+            this.richTextBox1.BackColor = System.Drawing.SystemColors.WindowFrame;
+            this.richTextBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.richTextBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.richTextBox1.ForeColor = System.Drawing.SystemColors.Menu;
+            this.richTextBox1.Location = new System.Drawing.Point(3, 7);
+            this.richTextBox1.Name = "richTextBox1";
+            this.richTextBox1.Size = new System.Drawing.Size(453, 59);
+            this.richTextBox1.TabIndex = 4;
+            this.richTextBox1.Text = "";
+            this.richTextBox1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.richTextBox1_KeyDown_1);
+            // 
+            // panel1
+            // 
+            this.panel1.Controls.Add(this.richTextBox1);
+            this.panel1.Controls.Add(this.button1);
+            this.panel1.Location = new System.Drawing.Point(0, 626);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(619, 80);
+            this.panel1.TabIndex = 6;
+            this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
+            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(619, 647);
+            this.ClientSize = new System.Drawing.Size(619, 704);
+            this.Controls.Add(this.panel1);
             this.Controls.Add(this.board);
             this.Controls.Add(this.menuStrip1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
@@ -312,6 +352,7 @@
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.board)).EndInit();
+            this.panel1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -347,6 +388,9 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Column22;
         public System.Windows.Forms.DataGridView board;
         private System.Windows.Forms.ToolStripMenuItem points0ToolStripMenuItem;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.RichTextBox richTextBox1;
+        private System.Windows.Forms.Panel panel1;
     }
 }
 

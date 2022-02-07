@@ -40,7 +40,7 @@
             this.clue_board.AllowUserToDeleteRows = false;
             this.clue_board.AllowUserToResizeColumns = false;
             this.clue_board.AllowUserToResizeRows = false;
-            this.clue_board.BackgroundColor = System.Drawing.Color.PapayaWhip;
+            this.clue_board.BackgroundColor = System.Drawing.SystemColors.WindowFrame;
             this.clue_board.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.clue_board.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Column1,
@@ -48,9 +48,12 @@
             this.clue_board.Dock = System.Windows.Forms.DockStyle.Fill;
             this.clue_board.Location = new System.Drawing.Point(0, 0);
             this.clue_board.Name = "clue_board";
+            this.clue_board.ReadOnly = true;
             this.clue_board.RowHeadersVisible = false;
             this.clue_board.Size = new System.Drawing.Size(384, 530);
             this.clue_board.TabIndex = 0;
+            this.clue_board.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.clue_board_CellClick);
+            this.clue_board.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.clue_board_CellContentClick);
             // 
             // Column1
             // 

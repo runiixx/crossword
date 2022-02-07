@@ -22,11 +22,17 @@ namespace crossword
         int contor_puncte = 0; // cell count for points
         int cifre = 1234567890; // unwanted characters
         bool finish = false; //finished loading 
+        public bool clue_show = true;
         public Main()
         {
             buildWordList();
             InitializeComponent();
-            
+            menuStrip1.BackColor = Color.FromArgb(31,31,31);
+            menuStrip1.ForeColor = Color.FromArgb(255, 255, 255);
+            panel1.BackColor= Color.FromArgb(31,31,31);
+            board.BackgroundColor = Color.FromArgb(30, 30, 30);
+            button1.BackColor = Color.FromArgb(60, 60, 60);
+   
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -44,8 +50,9 @@ namespace crossword
 
 
             contor_puncte = 0;
-            board.BackgroundColor = Color.PapayaWhip; //every cells becomes black 
-            board.DefaultCellStyle.BackColor = Color.PapayaWhip;
+            board.BackgroundColor = Color.FromArgb(60,60,60); //every cells becomes black 
+            board.DefaultCellStyle.BackColor = Color.FromArgb( 60, 60,60);
+            board.DefaultCellStyle.SelectionBackColor = Color.FromArgb(60, 60, 60); 
             for (int i = 0; i < 24; i++)
             {
                 board.Rows.Add();
@@ -58,7 +65,7 @@ namespace crossword
             }
             foreach (DataGridViewRow r in board.Rows) //divides rows height to screen resolution
             {
-                r.Height = board.Width / board.Rows.Count;
+                r.Height = board.Height / board.Rows.Count;
             }
             for (int row = 0; row < board.Rows.Count; row++)
             {
@@ -94,11 +101,8 @@ namespace crossword
         private void formatCell(int row, int col, String letter) //formats any playable cell 
         { 
             DataGridViewCell c = board[col, row]; //cell object
-            if (c.Tag == null && letter != " ") 
-            {
-                contor_puncte++;
-            }
-            c.Style.BackColor = Color.White; //applies the style of the playable cell 
+            contor_puncte++;
+            c.Style.BackColor = Color.FromArgb(212,212,212); //applies the style of the playable cell 
             c.ReadOnly = false;
             c.Style.SelectionBackColor = Color.Cyan;
             c.Style.SelectionForeColor = Color.Black;
@@ -221,8 +225,9 @@ namespace crossword
         {
             String number = "";
             if(idc.Any(c => (number = c.number) != ""&& c.x == e.ColumnIndex && c.y == e.RowIndex)){
+                System.Drawing.SolidBrush myBrush = new System.Drawing.SolidBrush(System.Drawing.Color.FromArgb(212,212,212));
                 Rectangle r = new Rectangle(e.CellBounds.X, e.CellBounds.Y, e.CellBounds.Width-1, e.CellBounds.Height-1);
-                e.Graphics.FillRectangle(Brushes.White, r);
+                e.Graphics.FillRectangle(myBrush , r);
                 Font f = new Font(e.CellStyle.Font.FontFamily, 7);
                 e.Graphics.DrawString(number, f, Brushes.Black, r);
                 e.PaintContent(e.ClipBounds);
@@ -233,6 +238,78 @@ namespace crossword
         private void points0ToolStripMenuItem_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            string text = richTextBox1.Text;
+            foreach(id_cells t in idc)
+            {
+                if(text.ToUpper() == t.word.ToUpper() && t.found==0)
+                {
+                    for(int i = 0; i<text.Length; i++)
+                    {
+                        if(t.direction.ToUpper() == "ACROSS")
+                        {
+                            board[t.x+i, t.y].Value = t.word[i];
+                        }
+                        else if(t.direction.ToUpper() == "DOWN")
+                        {
+                            board[t.x, t.y+i].Value = t.word[i];
+                        }
+                    }
+                    t.found =1;
+                    
+                }
+            }
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+           
+        }
+
+        private void progressBar1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void panel1_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        
+
+        private void richTextBox1_KeyDown_1(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                //Do what you have to do
+
+                string text = richTextBox1.Text;
+                foreach (id_cells t in idc)
+                {
+                    if (text.ToUpper() == t.word.ToUpper() && t.found==0)
+                    {
+                        for (int j = 0; j<text.Length; j++)
+                        {
+                            if (t.direction.ToUpper() == "ACROSS")
+                            {
+                                board[t.x+j, t.y].Value = t.word[j];
+                            }
+                            else if (t.direction.ToUpper() == "DOWN")
+                            {
+                                board[t.x, t.y+j].Value = t.word[j];
+                            }
+                        }
+                        t.found =1;
+
+                    }
+                }
+                int i = richTextBox1.Text.Length;
+                richTextBox1.Text = "";
+            }
         }
 
         private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
@@ -249,6 +326,7 @@ namespace crossword
         public String number; //number of item
         public String word; //the word to guess
         public String clue; // the question/clue to find out 
+        public int found;
 
         public id_cells(int x, int y, String d, String n, String w, String c) //initialize the objects with these attributes
         {
@@ -258,6 +336,7 @@ namespace crossword
             this.number = n;
             this.word = w;
             this.clue = c;
+            this.found = 0;
             
         }
     }
